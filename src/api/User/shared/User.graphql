@@ -16,6 +16,16 @@ type User {
   lastLng: Float
   lastLat: Float
   lastOrientation: Float
+  fbId: String
+  chat: Chat
+  messages: [Message]
+  verifications: [Verification]
+  rideAsPassenger: [Ride]
+  rideAsDriver: [Ride]
   createdAt: String!
   updatedAt: String
+}
+
+type Query {
+  user: User
 }
