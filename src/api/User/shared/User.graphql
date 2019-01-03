@@ -1,13 +1,3 @@
-type Query {
-  sayBye: String!
-  sayHello(name: String!): SayHelloResponse!
-}
-
-type SayHelloResponse {
-  text: String!
-  error: Boolean!
-}
-
 type User {
   id: Int!
   email: String
@@ -28,14 +18,4 @@ type User {
   lastOrientation: Float
   createdAt: String!
   updatedAt: String
-}
-
-type Verification {
-  id: Int!
-  target: String!
-  payload: String!
-  key: String!
-  used: Boolean!
-  createdAt: String!
-  updatedAt: String!
 }
