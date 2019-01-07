@@ -18,14 +18,14 @@ with GraphQL, Typescript, NodeJS
 ### Authentication:
 
 - [x] Generate JWT
-- [ ] Verifiy JWT
+- [x] Verifiy JWT
 
 ---
 
 ### Private Resolvers:
 
+- [x] Get my Profile
 - [ ] Verify Email
-- [ ] Get my Profile
 - [ ] Update my Profile
 - [ ] Toggle Driving Mode
 - [ ] Delete Place
