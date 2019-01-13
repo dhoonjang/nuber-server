@@ -25,10 +25,14 @@ with GraphQL, Typescript, NodeJS
 ### Private Resolvers:
 
 - [x] Get my Profile
-- [ ] Verify Email
-- [ ] Update my Profile
-- [ ] Toggle Driving Mode
+- [x] Request Email Verification
+- [x] Complete Email Verification
+- [x] Update my Profile
+- [x] Toggle Driving Mode
+- [x] Add Place
+- [x] Edit Place
 - [ ] Delete Place
+- [ ] Get My Places
 - [ ] See Nearby Drivers
 - [ ] Subscribe to Nearby Drivers
 - [ ] Request a Ride
