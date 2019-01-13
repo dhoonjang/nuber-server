@@ -2,11 +2,12 @@ import { Between, getRepository } from "typeorm";
 import User from "../../../entities/User";
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
+import { GetNearbyDriversResponse } from "src/types/graph";
 
 const resolvers: Resolvers = {
     Query: {
         GetNearbyDrivers: privateResolver(
-            async (_, __, { req }): Promise<any> => {
+            async (_, __, { req }): Promise<GetNearbyDriversResponse> => {
                 const user: User = req.user;
                 const { lastLat, lastLng } = user;
                 try {
