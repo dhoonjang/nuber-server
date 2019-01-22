@@ -20,30 +20,27 @@ const resolvers: Resolvers = {
         if (user.isDriving) {
           try {
             let ride: Ride | undefined;
-            console.log(args.status === "ACCEPTED");
-            if(args.status === "ACCEPTED"){
-                ride = await Ride.findOne({
-                    id: args.rideId,
-                    status: "REQUESTING"
-                }, { relations: ["passenger"] });
-                console.log(ride);
-                if(ride) {
-                    ride.driver = user;
-                    user.isTaken = true;
-                    user.save();
-                    const chat = await Chat.create({
-                        driver: user,
-                        passenger: ride.passenger
-                    }).save();
-                    console.log(chat);
-                    ride.chat = chat;
-                    ride.save();
-                }
+            if (args.status === "ACCEPTED") {
+              ride = await Ride.findOne({
+                id: args.rideId,
+                status: "REQUESTING"
+              }, { relations: ["passenger", "driver"] });
+              if (ride) {
+                ride.driver = user;
+                user.isTaken = true;
+                user.save();
+                const chat = await Chat.create({
+                  driver: user,
+                  passenger: ride.passenger
+                }).save();
+                ride.chat = chat;
+                ride.save();
+              }
             } else {
-                ride = await Ride.findOne({
-                    id: args.rideId,
-                    driver: user
-                });
+              ride = await Ride.findOne({
+                id: args.rideId,
+                driver: user
+              }, { relations: ["passenger", "driver"] });
             }
 
             if (ride) {
@@ -51,26 +48,30 @@ const resolvers: Resolvers = {
               ride.save();
               pubSub.publish("rideUpdate", { RideStatusSubscription: ride })
               return {
-                  ok: true,
-                  error: null,
+                ok: true,
+                error: null,
+                rideId: args.rideId
               };
             } else {
               return {
                 ok: false,
-                error: "Can't update ride"
+                error: "Can't update ride",
+                rideId: args.rideId
               };
             }
           } catch (error) {
             return {
               ok: false,
-              error: error.message
+              error: error.message,
+              rideId: args.rideId
             };
           }
         } else {
-            return {
-                ok: false,
-                error: "You are not driving"
-            }
+          return {
+            ok: false,
+            error: "You are not driving",
+            rideId: args.rideId
+          }
         }
       }
     )
