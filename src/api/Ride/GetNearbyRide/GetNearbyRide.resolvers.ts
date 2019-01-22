@@ -17,8 +17,10 @@ const resolvers: Resolvers = {
               status: "REQUESTING",
               pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
               pickUpLng: Between(lastLng - 0.05, lastLng + 0.05)
-            });
-            if(ride) {
+            },
+              { relations: ["passenger"] }
+            );
+            if (ride) {
               return {
                 ok: true,
                 error: null,

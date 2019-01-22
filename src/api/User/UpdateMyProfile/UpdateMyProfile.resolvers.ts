@@ -16,7 +16,8 @@ const resolvers: Resolvers = {
                 user.save();
                 delete notNull.password;
             }
-            await User.update({ id: user.id }, { ...notNull });
+            const bug = await User.update({ id: user.id }, { ...notNull });
+            console.log(bug);
             return {
                 ok: true,
                 error: null
